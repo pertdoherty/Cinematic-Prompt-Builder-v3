@@ -1,8 +1,10 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
+// Replace '<repository-name>' with your actual GitHub repository name
+const repoName = 'Cinematic-Prompt-Builder-v3';
+
 export default defineConfig({
   plugins: [react()],
-  base: '/Cinematic-Prompt-Builder-v3/', // Ensures correct asset paths for GitHub Pages
-})
+  base: `/${repoName}/`, // This ensures correct relative paths
+});
