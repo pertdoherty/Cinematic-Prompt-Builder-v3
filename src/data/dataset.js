@@ -63,7 +63,7 @@ export const cinematicDataset = {
     "Fujifilm Velvia", "Ilford HP5", "Cinestill 800T", "Vintage 35mm Film", "IMAX Film Look"
   ],
   movies: [
-    { label: "Blade Runner", year: "1982", image: "https://pertdoherty.github.io/Cinematic-Prompt-Builder-v3/src/assets/Blade_Runner_1982.webp" },
+    { label: "Blade Runner", year: "1982", image: "/Cinematic-Prompt-Builder-v3/src/assets/Blade_Runner_1982.webp" },
     { label: "Blade Runner 2049", year: "2017", image: "" },
     { label: "2001: A Space Odyssey", year: "1968", image: "" },
     { label: "1917", year: "2019", image: "" },
