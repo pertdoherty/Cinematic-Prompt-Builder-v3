@@ -6,5 +6,8 @@ const repoName = 'Cinematic-Prompt-Builder-v3';
 
 export default defineConfig({
   plugins: [react()],
-  base: `/${repoName}/`, // This ensures correct relative paths
+  base: './', // Use relative paths for maximum compatibility
+  build: {
+    outDir: 'docs', // Build into /docs folder for easy GitHub Pages deployment
+  }
 });
