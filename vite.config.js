@@ -6,7 +6,7 @@ const repoName = 'Cinematic-Prompt-Builder-v3';
 
 export default defineConfig({
   plugins: [react()],
-  base: './', // Use relative paths for maximum compatibility
+  base: '/Cinematic-Prompt-Builder-v3/', // Explicit base for GitHub Pages subfolder
   build: {
     outDir: 'dist', // Standard Vite build folder
   }
