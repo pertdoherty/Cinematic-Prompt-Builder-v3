@@ -8,6 +8,6 @@ export default defineConfig({
   plugins: [react()],
   base: './', // Use relative paths for maximum compatibility
   build: {
-    outDir: 'docs', // Build into /docs folder for easy GitHub Pages deployment
+    outDir: 'dist', // Standard Vite build folder
   }
 });
