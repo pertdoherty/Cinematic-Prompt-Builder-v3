@@ -383,3 +383,114 @@ body {
   color: var(--text-secondary);
   font-weight: 500;
 }
+
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 100%;
+    --header-height: 50px;
+  }
+
+  body {
+    overflow: auto;
+    height: auto;
+  }
+
+  .app-wrapper {
+    height: auto;
+  }
+
+  .main-layout {
+    flex-direction: column;
+    overflow: visible;
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    overflow: visible;
+    height: auto;
+  }
+
+  .content-area {
+    overflow: visible;
+  }
+
+  .preview-panel {
+    padding: 1.5rem;
+    padding-bottom: 220px;
+    /* More space for sticky prompt */
+  }
+
+  .prompt-output-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    background: #0d0d0d;
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    gap: 0.5rem;
+  }
+
+  .prompt-box {
+    padding: 1rem !important;
+    border-radius: 8px;
+    box-shadow: none;
+  }
+
+  .prompt-box h3 {
+    margin-bottom: 0.5rem !important;
+    font-size: 0.6rem !important;
+  }
+
+  .prompt-content {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+    max-height: 80px;
+    overflow-y: auto;
+  }
+
+  .copy-btn {
+    margin-top: 0.5rem !important;
+    padding: 0.6rem 1rem !important;
+  }
+
+  .empty-state {
+    margin-top: 1rem;
+    padding: 1.5rem;
+  }
+
+  /* Adjust Modal for Mobile */
+  .modal-content {
+    width: 95vw;
+    max-height: 90vh;
+  }
+
+  .modal-header {
+    padding: 1rem;
+  }
+
+  .modal-grid {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .modal-image-item {
+    width: 100%;
+    /* Full width cards on mobile */
+    min-height: auto;
+  }
+
+  .modal-thumbnail-area {
+    height: 100px;
+  }
+
+  .modal-image-label {
+    padding: 0.75rem;
+  }
+}
