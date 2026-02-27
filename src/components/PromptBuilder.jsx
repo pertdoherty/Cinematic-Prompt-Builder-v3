@@ -48,32 +48,66 @@ const PromptBuilder = () => {
     };
 
     const generateFinalPrompt = () => {
-        const parts = [
-            selections.stylePrompt,
-            selections.subjectAction,
-            selections.environment,
-            selections.shotSize,
-            selections.angleElevation,
-            selections.viewpoint,
-            selections.composition,
-            lookFeelMode !== 'none' && selections.lookFeel ? `in the style of ${selections.lookFeel}` : '',
-            selections.perspective,
-            selections.depthLayers,
-            selections.lightingStyle,
-            selections.lightingSource,
-            selections.atmosphere,
-            selections.timeOfDay,
-            selections.weather,
-            selections.cameraBody,
-            selections.lensType,
-            selections.focalLength,
-            selections.aperture,
-            selections.filmStock,
-            selections.filter,
-            selections.aspectRatio ? `--ar ${selections.aspectRatio}` : ''
-        ].filter(part => part && part !== '' && part !== 'Unspecified');
+        const {
+            subjectAction, environment, stylePrompt, shotSize, angleElevation,
+            viewpoint, composition, perspective, aspectRatio, lightingSource,
+            lightingStyle, atmosphere, timeOfDay, weather, cameraBody,
+            lensType, focalLength, aperture, filmStock, filter, depthLayers, lookFeel
+        } = selections;
 
-        return parts.join(', ');
+        const parts = [];
+
+        // 1. Core Scene
+        if (subjectAction || environment) {
+            let core = "Cinematic scene of ";
+            if (subjectAction) core += `a ${subjectAction}`;
+            else core += "a cinematic subject";
+
+            if (environment) core += ` set in ${environment}`;
+            parts.push(core);
+        } else {
+            parts.push("Cinematic scene");
+        }
+
+        // 2. Composition & Framing
+        if (shotSize) parts.push(shotSize);
+        if (angleElevation) parts.push(angleElevation);
+        if (viewpoint && viewpoint !== 'Unspecified') parts.push(`${viewpoint} View`);
+        if (composition && composition !== 'Standard') parts.push(`composed using ${composition}`);
+
+        // 3. Perspective & Depth
+        if (perspective && perspective !== 'None') parts.push(`${perspective} Perspective`);
+        if (depthLayers && depthLayers !== 'None') parts.push(`with ${depthLayers}`);
+
+        // 4. Camera & Technicals
+        if (cameraBody && cameraBody !== 'Default') parts.push(`captured with ${cameraBody}`);
+        if (focalLength && focalLength !== 'None') parts.push(focalLength);
+        if (aperture && aperture !== 'None') parts.push(`aperture ${aperture}`);
+        if (lensType && lensType !== 'Unspecified') parts.push(lensType);
+        if (filmStock && filmStock !== 'Modern Digital') parts.push(`${filmStock} film`);
+        if (filter && filter !== 'None') parts.push(`with ${filter} filter`);
+
+        // 5. Lighting & Atmosphere
+        if (lightingSource && lightingSource !== 'Unspecified') parts.push(lightingSource);
+        if (lightingStyle && lightingStyle !== 'Unspecified') parts.push(lightingStyle);
+        if (atmosphere && atmosphere !== 'Unspecified') parts.push(`${atmosphere} mood`);
+        if (timeOfDay && timeOfDay !== 'None') parts.push(`during ${timeOfDay}`);
+        if (weather && weather !== 'None') parts.push(`${weather} weather`);
+
+        // 6. Look & Feel (Movies/Directors)
+        if (lookFeelMode !== 'none' && lookFeel) {
+            if (lookFeelMode === 'movies') {
+                parts.push(`inspired by the film ${lookFeel}`);
+            } else if (lookFeelMode === 'director') {
+                parts.push(`in the style of ${lookFeel}`);
+            }
+        }
+
+        // 7. Style Prompt & Meta
+        if (stylePrompt) parts.push(stylePrompt);
+        if (aspectRatio) parts.push(`--ar ${aspectRatio}`);
+
+        return parts.filter(p => p).join(', ');
     };
 
     return (
