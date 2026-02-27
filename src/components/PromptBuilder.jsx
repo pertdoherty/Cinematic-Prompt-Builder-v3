@@ -58,8 +58,11 @@ const PromptBuilder = () => {
         const parts = [];
 
         // 1. Core Scene
-        if (subjectAction || environment) {
-            let core = "Cinematic scene of ";
+        if (subjectAction || environment || stylePrompt) {
+            let core = "";
+            if (stylePrompt) core += `${stylePrompt} scene of `;
+            else core += "Cinematic scene of ";
+
             if (subjectAction) core += `a ${subjectAction}`;
             else core += "a cinematic subject";
 
@@ -103,8 +106,7 @@ const PromptBuilder = () => {
             }
         }
 
-        // 7. Style Prompt & Meta
-        if (stylePrompt) parts.push(stylePrompt);
+        // 7. Meta parameters
         if (aspectRatio) parts.push(`--ar ${aspectRatio}`);
 
         return parts.filter(p => p).join(', ');
