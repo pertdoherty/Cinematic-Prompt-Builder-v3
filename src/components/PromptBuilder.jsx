@@ -290,19 +290,13 @@ const PromptBuilder = () => {
                 <div className="sidebar-section">
                     <div className="section-title">Camera & Technicals</div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginBottom: '1rem' }}>
-                        <div className="control-group">
-                            <label className="input-label">Body</label>
-                            <select className="custom-select" value={selections.cameraBody} onChange={(e) => handleSelection('cameraBody', e.target.value)}>
-                                <option value="">Default</option>
-                                {cinematicDataset.cameraBodies.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                            </select>
+                        <div className="visual-item" onClick={() => setModalType('cameraBodies')}>
+                            <span className="visual-label">Body</span>
+                            <span className="visual-value">{selections.cameraBody || 'Default'}</span>
                         </div>
-                        <div className="control-group">
-                            <label className="input-label">Lens Type</label>
-                            <select className="custom-select" value={selections.lensType} onChange={(e) => handleSelection('lensType', e.target.value)}>
-                                <option value="">Unspecified</option>
-                                {cinematicDataset.lensType.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                            </select>
+                        <div className="visual-item" onClick={() => setModalType('lensType')}>
+                            <span className="visual-label">Lens Type</span>
+                            <span className="visual-value">{selections.lensType || 'Unspecified'}</span>
                         </div>
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginBottom: '1rem' }}>
@@ -321,12 +315,9 @@ const PromptBuilder = () => {
                             </select>
                         </div>
                     </div>
-                    <div className="control-group" style={{ marginBottom: '1rem' }}>
-                        <label className="input-label">Film Stock</label>
-                        <select className="custom-select" value={selections.filmStock} onChange={(e) => handleSelection('filmStock', e.target.value)}>
-                            <option value="">Modern Digital</option>
-                            {cinematicDataset.filmStock.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                        </select>
+                    <div className="visual-item" style={{ width: '100%', marginBottom: '1rem' }} onClick={() => setModalType('filmStock')}>
+                        <span className="visual-label">Film Stock</span>
+                        <span className="visual-value">{selections.filmStock || 'Modern Digital'}</span>
                     </div>
                     <div className="control-group">
                         <label className="input-label">Filter</label>
@@ -402,6 +393,27 @@ const PromptBuilder = () => {
                 options={cinematicDataset.directors}
                 onClose={() => setModalType(null)}
                 onSelect={(val) => handleSelection('lookFeel', val)}
+            />
+            <VisualModal
+                title="Camera Body"
+                isOpen={modalType === 'cameraBodies'}
+                options={cinematicDataset.cameraBodies}
+                onClose={() => setModalType(null)}
+                onSelect={(val) => handleSelection('cameraBody', val)}
+            />
+            <VisualModal
+                title="Lens Type"
+                isOpen={modalType === 'lensType'}
+                options={cinematicDataset.lensType}
+                onClose={() => setModalType(null)}
+                onSelect={(val) => handleSelection('lensType', val)}
+            />
+            <VisualModal
+                title="Film Stock"
+                isOpen={modalType === 'filmStock'}
+                options={cinematicDataset.filmStock}
+                onClose={() => setModalType(null)}
+                onSelect={(val) => handleSelection('filmStock', val)}
             />
         </div>
     );
